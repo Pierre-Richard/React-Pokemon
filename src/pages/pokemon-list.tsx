@@ -1,13 +1,15 @@
 import React, { FunctionComponent, useState, useEffect } from 'react';
 import Pokemon from '../models/pokemon';
-import POKEMONS from '../models/mocks-pokemon';
 import PokemonCard from '../components/pokemon-card';
+import PokemonService from '../services/service-pokemon';
   
 const PokemonList: FunctionComponent = () => {
   const [pokemons, setPokemons] = useState<Pokemon[]>([]);
   
   useEffect(() => {
-    setPokemons(POKEMONS);
+    /* j'utilise mon service pour pouvoir recuperer la liste des pokemons depuis l'api rest  */
+    /* et je mets à jour l'etat de mon composant avec les pokemons reçu */
+    PokemonService.getPokemons().then(pokemons => setPokemons(pokemons))
   }, []);
   
   return (
